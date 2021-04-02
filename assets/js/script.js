@@ -2,6 +2,7 @@ var cityInputEl = document.querySelector('#city-input');
 var submitBtn = document.querySelector('#submit');
 var weatherContainerEl = document.querySelector('#weather-display');
 var cityNameEl = document.querySelector('#city-name');
+var cardGroup = document.querySelector('#card-group');
 
 
 
@@ -62,27 +63,28 @@ var displayWeather = function (weathers, cityName) {
     var temp = weathers[i].main.temp;
     var wind = weathers[i].wind.speed;
     var humidity = weathers[i].main.humidity;
+    var icon = weathers[i].weather[i].icon;
 
     var justDate = date.split(' ');
-
-
     var justtemp = Math.round(temp);
-   
-  
 
-    dateEl = document.createElement('h3');
+    iconEl = document.createElement('img');
+    iconEl.setAttribute('src', 'http://openweathermap.org/img/wn/' + icon + '@2x.png');
+    weatherContainerEl.appendChild(iconEl);
+
+    dateEl = document.createElement('h4');
     dateEl.textContent = "Date: " + justDate[0];
     weatherContainerEl.appendChild(dateEl);
 
-    tempEl = document.createElement('h3');
+    tempEl = document.createElement('h4');
     tempEl.textContent = "Temp: " + justtemp + " C";
     weatherContainerEl.appendChild(tempEl);
 
-    windEl = document.createElement('h3');
+    windEl = document.createElement('h4');
     windEl.textContent = "Wind: " + wind + "km/h";
     weatherContainerEl.appendChild(windEl);
 
-    humidEl = document.createElement('h3');
+    humidEl = document.createElement('h4');
     humidEl.textContent = "Humidity: " + humidity + "%";
     weatherContainerEl.appendChild(humidEl);
 
