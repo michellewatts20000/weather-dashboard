@@ -79,11 +79,11 @@ var displayWeather = function (weathers, cityName) {
     weatherContainerEl.appendChild(tempEl);
 
     windEl = document.createElement('h3');
-    windEl.textContent = "Wind: " + wind;
+    windEl.textContent = "Wind: " + wind + "km/h";
     weatherContainerEl.appendChild(windEl);
 
     humidEl = document.createElement('h3');
-    humidEl.textContent = "Humidity: " + humidity;
+    humidEl.textContent = "Humidity: " + humidity + "%";
     weatherContainerEl.appendChild(humidEl);
 
   
