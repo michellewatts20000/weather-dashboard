@@ -8,93 +8,122 @@ var cityNameEl = document.querySelector('#city-name');
 submitBtn.addEventListener("click", getCityWeather);
 
 
-function getCityWeather(event){
+function getCityWeather(event) {
   event.preventDefault();
-  var search = cityInputEl.value.trim();
+  var search = cityInputEl.value.trim().toUpperCase();
 
-  console.log(search);
- 
+  if (search) {
+    getCityWeather(search);
 
-  
-  
+    // clears contents fix later
+    weatherContainerEl.textContent = '';
+    cityNameEl.value = '';
+  } else {
+    alert('Please enter a city');
+  }
+};
 
+var getCityWeather = function (city) {
+  var apiUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=2a22b3e133c85e6d24eda75368e647fc';
+
+  console.log(apiUrl);
+
+  fetch(apiUrl)
+    .then(function (response) {
+      if (response.ok) {
+        console.log(response);
+        response.json().then(function (data) {
+          console.log(data.list);
+          console.log(data);
+          displayWeather(data.list, city);
+        });
+      } else {
+        alert('Error: ' + response.statusText);
+      }
+    })
+    .catch(function (error) {
+      alert('Unable to connect to Open Weather');
+    });
 };
 
 
-// submitBtn.addEventListener('click', formSubmitHandler);
-// console.log(cityInputEl);
-// console.log(search);
-// var formSubmitHandler = function (event) {
-//   event.preventDefault();
 
-//   var search = cityInputEl.value.trim();
-// console.log(search);
-//   if (search) {
-//     getCityWeather(search);
+var displayWeather = function (weathers, cityName) {
+  if (weathers.length === 0) {
+    weatherContainerEl.textContent = 'No repositories found.';
+    return;
+  }
 
-//     // clears contents fix later
-//     repoContainerEl.textContent = '';
-//     nameInputEl.value = '';
-//   } else {
-//     alert('Please enter a city');
-//   }
-// };
+  cityNameEl.textContent = cityName;
 
+  for (var i = 0; i < 1; i++) {
+    
+    var date = weathers[i].dt_txt;
+    var temp = weathers[i].main.temp;
+    var wind = weathers[i].wind.speed;
+    var humidity = weathers[i].main.humidity;
 
-// var getCityWeather = function (city) {
-//   var apiUrl = 'api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=2a22b3e133c85e6d24eda75368e647fc';
+    const chars = date.split('');
+    console.log(chars[5]);
+    // expected output: "k"
 
-//   fetch(apiUrl)
-//     .then(function (response) {
-//       if (response.ok) {
-//         console.log(response);
-//         response.json().then(function (data) {
-//           console.log(data);
-//           displayWeather(data, city);
-//         });
-//       } else {
-//         alert('Error: ' + response.statusText);
-//       }
-//     })
-//     .catch(function (error) {
-//       alert('Unable to connect to Open Weather');
-//     });
-// };
+    
 
 
+    // date.split(' ');
+    console.log(date);
 
-// var displayWeather = function (repos, cityName) {
-//   if (repos.length === 0) {
-//     weatherContainerEl.textContent = 'No repositories found.';
-//     return;
-//   }
+    dateEl = document.createElement('h3');
+    dateEl.textContent = date;
+    weatherContainerEl.appendChild(dateEl);
 
-//   cityNameEl.textContent = cityName;
+  
 
-//   // for (var i = 0; i < repos.length; i++) {
-//   //   var repoName = repos[i].list.main.temp + '/' + repos[i].name;
+    console.log(typeof date);
+    console.log(temp);
+    console.log(wind);
+    console.log(humidity);
 
-//   //   var repoEl = document.createElement('a');
-//   //   repoEl.classList = 'list-item flex-row justify-space-between align-center';
-//   //   repoEl.setAttribute('href', './single-repo.html?repo=' + repoName);
+  };
 
-//   //   var titleEl = document.createElement('span');
-//   //   titleEl.textContent = repoName;
+  for (var i = 0; i < weathers.length; i++) {
 
-//   //   repoEl.appendChild(titleEl);
+   
+    var date = weathers[i].dt_txt;
+    var temp = weathers[i].main.temp;
+    var wind = weathers[i].wind.speed;
+    var humidity = weathers[i].main.humidity;
 
-//   //   var statusEl = document.createElement('span');
-//   //   statusEl.classList = 'flex-row align-center';
+    // console.log(date);
+    // console.log(temp);
+    // console.log(wind);
+    // console.log(humidity);
 
-//   //   if (repos[i].open_issues_count > 0) {
-//   //     statusEl.innerHTML =
-//   //       "<i class='fas fa-times status-icon icon-danger'></i>" + repos[i].open_issues_count + ' issue(s)';
-//   //   } else {
-//   //     statusEl.innerHTML = "<i class='fas fa-check-square status-icon icon-success'></i>";
-//   //   }
+  };
 
-//   //   repoEl.appendChild(statusEl);
 
-//   //   repoContainerEl.appendChild(repoEl);
-// // }
-// };
+
+    // var repoEl = document.createElement('a');
+    // repoEl.classList = 'list-item flex-row justify-space-between align-center';
+    // repoEl.setAttribute('href', './single-repo.html?repo=' + weatherLoop);
+
+    // var titleEl = document.createElement('span');
+    // titleEl.textContent = weatherLoop;
+
+    // repoEl.appendChild(titleEl);
+
+    // var statusEl = document.createElement('span');
+    // statusEl.classList = 'flex-row align-center';
+
+    // if (repos[i].open_issues_count > 0) {
+    //   statusEl.innerHTML =
+    //     "<i class='fas fa-times status-icon icon-danger'></i>" + repos[i].open_issues_count + ' issue(s)';
+    // } else {
+    //   statusEl.innerHTML = "<i class='fas fa-check-square status-icon icon-success'></i>";
+    // }
+
+    // repoEl.appendChild(statusEl);
+
+    // repoContainerEl.appendChild(repoEl);
+  
+};
