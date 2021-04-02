@@ -24,7 +24,7 @@ function getCityWeather(event) {
 };
 
 var getCityWeather = function (city) {
-  var apiUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=2a22b3e133c85e6d24eda75368e647fc';
+  var apiUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=2a22b3e133c85e6d24eda75368e647fc&units=metric';
 
   console.log(apiUrl);
 
@@ -64,12 +64,27 @@ var displayWeather = function (weathers, cityName) {
     var humidity = weathers[i].main.humidity;
 
     var justDate = date.split(' ');
+
+
+    var justtemp = Math.round(temp);
    
   
 
     dateEl = document.createElement('h3');
-    dateEl.textContent = justDate[0];
+    dateEl.textContent = "Date: " + justDate[0];
     weatherContainerEl.appendChild(dateEl);
+
+    tempEl = document.createElement('h3');
+    tempEl.textContent = "Temp: " + justtemp + " C";
+    weatherContainerEl.appendChild(tempEl);
+
+    windEl = document.createElement('h3');
+    windEl.textContent = "Wind: " + wind;
+    weatherContainerEl.appendChild(windEl);
+
+    humidEl = document.createElement('h3');
+    humidEl.textContent = "Humidity: " + humidity;
+    weatherContainerEl.appendChild(humidEl);
 
   
 
