@@ -63,23 +63,17 @@ var displayWeather = function (weathers, cityName) {
     var wind = weathers[i].wind.speed;
     var humidity = weathers[i].main.humidity;
 
-    const chars = date.split('');
-    console.log(chars[5]);
-    // expected output: "k"
-
-    
-
-
-    // date.split(' ');
-    console.log(date);
+    var justDate = date.split(' ');
+   
+  
 
     dateEl = document.createElement('h3');
-    dateEl.textContent = date;
+    dateEl.textContent = justDate[0];
     weatherContainerEl.appendChild(dateEl);
 
   
 
-    console.log(typeof date);
+    console.log(date);
     console.log(temp);
     console.log(wind);
     console.log(humidity);
