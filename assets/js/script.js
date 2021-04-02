@@ -90,51 +90,44 @@ var displayWeather = function (weathers, cityName) {
 
   
 
-    console.log(date);
-    console.log(temp);
-    console.log(wind);
-    console.log(humidity);
 
   };
 
-  for (var i = 0; i < weathers.length; i++) {
+  for (var i = 2; i < 7; i++) {
 
    
     var date = weathers[i].dt_txt;
-    var temp = weathers[i].main.temp;
-    var wind = weathers[i].wind.speed;
-    var humidity = weathers[i].main.humidity;
+    // var temp = weathers[i].main.temp;
+    // var wind = weathers[i].wind.speed;
+    // var humidity = weathers[i].main.humidity;
 
-    // console.log(date);
-    // console.log(temp);
-    // console.log(wind);
-    // console.log(humidity);
+
+    newCard = document.createElement('div');
+    newCard.classList = 'card';
+    cardGroup.appendChild(newCard);
+
+    innerCard = document.createElement('div');
+    innerCard.classList = 'card-body';
+    newCard.appendChild(innerCard);
+
+    cardContent = document.createElement('h4');
+    cardContent.textContent = date;
+    innerCard.appendChild(cardContent);
+
+    
+
 
   };
 
 
 
-    // var repoEl = document.createElement('a');
-    // repoEl.classList = 'list-item flex-row justify-space-between align-center';
-    // repoEl.setAttribute('href', './single-repo.html?repo=' + weatherLoop);
-
-    // var titleEl = document.createElement('span');
-    // titleEl.textContent = weatherLoop;
-
-    // repoEl.appendChild(titleEl);
-
-    // var statusEl = document.createElement('span');
-    // statusEl.classList = 'flex-row align-center';
-
-    // if (repos[i].open_issues_count > 0) {
-    //   statusEl.innerHTML =
-    //     "<i class='fas fa-times status-icon icon-danger'></i>" + repos[i].open_issues_count + ' issue(s)';
-    // } else {
-    //   statusEl.innerHTML = "<i class='fas fa-check-square status-icon icon-success'></i>";
-    // }
-
-    // repoEl.appendChild(statusEl);
-
-    // repoContainerEl.appendChild(repoEl);
   
 };
+
+
+
+
+// console.log(date);
+// console.log(temp);
+// console.log(wind);
+// console.log(humidity);
