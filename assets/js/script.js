@@ -58,7 +58,7 @@ var displayWeather = function (weathers, cityName) {
   cityNameEl.textContent = cityName;
 
   for (var i = 0; i < 1; i++) {
-    
+
     var date = weathers[i].dt_txt;
     var temp = weathers[i].main.temp;
     var wind = weathers[i].wind.speed;
@@ -88,40 +88,42 @@ var displayWeather = function (weathers, cityName) {
     humidEl.textContent = "Humidity: " + humidity + "%";
     weatherContainerEl.appendChild(humidEl);
 
-  
+
 
 
   };
 
-  for (var i = 2; i < 7; i++) {
+  for (var i = 0; i < 7; i++) {
+
+
+    var date = weathers[i].dt_txt;
 
    
-    var date = weathers[i].dt_txt;
-    // var temp = weathers[i].main.temp;
-    // var wind = weathers[i].wind.speed;
-    // var humidity = weathers[i].main.humidity;
+      // var temp = weathers[i].main.temp;
+      // var wind = weathers[i].wind.speed;
+      // var humidity = weathers[i].main.humidity;
 
 
-    newCard = document.createElement('div');
-    newCard.classList = 'card';
-    cardGroup.appendChild(newCard);
+      newCard = document.createElement('div');
+      newCard.classList = 'card';
+      cardGroup.appendChild(newCard);
 
-    innerCard = document.createElement('div');
-    innerCard.classList = 'card-body';
-    newCard.appendChild(innerCard);
+      innerCard = document.createElement('div');
+      innerCard.classList = 'card-body';
+      newCard.appendChild(innerCard);
 
-    cardContent = document.createElement('h4');
-    cardContent.textContent = date;
-    innerCard.appendChild(cardContent);
+      cardContent = document.createElement('h4');
+      cardContent.textContent = date;
+      innerCard.appendChild(cardContent);
 
-    
+   
 
 
   };
 
 
 
-  
+
 };
 
 
