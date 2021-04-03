@@ -122,9 +122,14 @@ var displayWeather = function (data, cityName) {
 
     if (currentDate != previousDate) {
 
-      // var temp = weathers[i].main.temp;
-      // var wind = weathers[i].wind.speed;
-      // var humidity = weathers[i].main.humidity;
+      console.log(data.list);
+      // var icon2 = data.list[i].weather[i].icon;
+      var temp = data.list[i].main.temp;
+      var wind = data.list[i].wind.speed;
+      var humidity = data.list[i].main.humidity;
+
+
+      // console.log(icon2);
 
       newCard = document.createElement('div');
       newCard.classList = 'card';
@@ -133,11 +138,35 @@ var displayWeather = function (data, cityName) {
       innerCard.classList = 'card-body';
       newCard.appendChild(innerCard);
 
+      // append the date
       var justDate = date.split(' ');
       var formatDate = moment(justDate[0]).format('dddd');
       cardContent = document.createElement('h4');
       cardContent.textContent = formatDate;
       innerCard.appendChild(cardContent);
+
+      // // append the icon
+      // cardContent2 = document.createElement('img');
+      // cardContent2.setAttribute('src', 'http://openweathermap.org/img/wn/' + icon2 + '@2x.png');
+      // innerCard.appendChild(cardContent2);
+
+      // append the temp
+      var justtemp = Math.round(temp);
+      cardContent = document.createElement('h4');
+      cardContent.textContent = "Temp: " + justtemp + " C";
+      innerCard.appendChild(cardContent);
+
+      // append the wind
+      cardContent = document.createElement('h4');
+      cardContent.textContent = "Wind: " + wind + " km/h";
+      innerCard.appendChild(cardContent);
+
+      // append the humidity
+      cardContent = document.createElement('h4');
+      cardContent.textContent = "Humidity: " + humidity + " %";
+      innerCard.appendChild(cardContent);
+
+
     }
     previousDate = currentDate;
 
@@ -151,43 +180,34 @@ var displayWeather = function (data, cityName) {
 };
 
 
-
-var getUvIndex = function(lat,lon){
+// calls api to retreive UV index
+var getUvIndex = function (lat, lon) {
   var apiKey = "844421298d794574c100e3409cee0499"
   var apiURL = `https://api.openweathermap.org/data/2.5/uvi?appid=${apiKey}&lat=${lat}&lon=${lon}`
   fetch(apiURL)
-  .then(function(response){
-      response.json().then(function(data){
-          displayUvIndex(data)
-        //  console.log(data)
+    .then(function (response) {
+      response.json().then(function (data) {
+        displayUvIndex(data)
+
       });
-  });
-  //console.log(lat);
-  //console.log(lon);
+    });
+
 }
 
 
-
-var displayUvIndex = function(index){
-  // var uvIndexEl = document.createElement("div");
-  // uvIndexEl.textContent = "UV Index: "
-  // uvIndexEl.classList = "list-group-item"
-
+// appends UV index to today's weather and gives it a background colour based on its value
+var displayUvIndex = function (index) {
   uvIndexValue = document.createElement("h4")
   uvIndexValue.textContent = "UV Index: " + index.value;
 
-  if(index.value <=2){
-      uvIndexValue.classList = "favorable"
-  }else if(index.value >2 && index.value<=8){
-      uvIndexValue.classList = "moderate "
-  }
-  else if(index.value >8){
-      uvIndexValue.classList = "severe"
+  if (index.value <= 2) {
+    uvIndexValue.classList = "favorable"
+  } else if (index.value > 2 && index.value <= 8) {
+    uvIndexValue.classList = "moderate "
+  } else if (index.value > 8) {
+    uvIndexValue.classList = "severe"
   };
 
-  // uvIndexEl.appendChild(uvIndexValue);
-
-  //append index to current weather
   weatherContainerEl.appendChild(uvIndexValue);
 }
 
