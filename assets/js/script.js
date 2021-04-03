@@ -8,6 +8,9 @@ var clearBtn = document.querySelector('#btnclear');
 var cardsShow = document.querySelector('.card');
 var hideThis = document.querySelector('#disappear');
 
+var key = config.SECRET_API_KEY;
+
+
 // where the local storage goes
 var cities = JSON.parse(localStorage.getItem("cities")) || [];
 
@@ -32,7 +35,7 @@ function getCityWeather(event) {
 
 // call the api and retreive the object data from within the list property
 var getCityWeather = function (city) {
-  var apiUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=2a22b3e133c85e6d24eda75368e647fc&units=metric';
+  var apiUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=' + key + '&units=metric';
   fetch(apiUrl)
     .then(function (response) {
       if (response.ok) {
@@ -95,7 +98,7 @@ var pastSearchHandler = function (event) {
   weatherContainerEl.textContent = '';
   cityNameEl.value = '';
   cardGroup.textContent = '';
-  var apiUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=2a22b3e133c85e6d24eda75368e647fc&units=metric';
+  var apiUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=' + key + '&units=metric';
   fetch(apiUrl)
     .then(function (response) {
       if (response.ok) {
@@ -227,8 +230,7 @@ var forecast = data.list;
 
 // calls api to retreive UV index
 var getUvIndex = function (lat, lon) {
-  var apiKey = "844421298d794574c100e3409cee0499"
-  var apiURL = `https://api.openweathermap.org/data/2.5/uvi?appid=${apiKey}&lat=${lat}&lon=${lon}`
+  var apiURL = `https://api.openweathermap.org/data/2.5/uvi?appid=${key}&lat=${lat}&lon=${lon}`
   fetch(apiURL)
     .then(function (response) {
       response.json().then(function (data) {
