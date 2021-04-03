@@ -8,9 +8,7 @@ var clearBtn = document.querySelector('#btnclear');
 var cardsShow = document.querySelector('.card');
 var hideThis = document.querySelector('#disappear');
 
-
-
-
+// where the local storage goes
 var cities = JSON.parse(localStorage.getItem("cities")) || [];
 
 // when user clicks search button run the getCityWeather function
@@ -53,7 +51,7 @@ var getCityWeather = function (city) {
   pastSearch(city);
 };
 
-
+// sets the local storage
 function saveSearch() {
   localStorage.setItem("cities", JSON.stringify(cities));
 }
