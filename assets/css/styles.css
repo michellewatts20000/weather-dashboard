@@ -20,6 +20,10 @@
 }
 
 
+.bg-dark {
+    background-color: lightsteelblue!important;
+}
+
 #no-border .card {
     border: none;
 
@@ -28,6 +32,10 @@
 
 .card {
    border:none;
+}
+
+#disappear {
+    display: none;
 }
 
 
