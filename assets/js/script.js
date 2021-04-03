@@ -24,7 +24,7 @@ function getCityWeather(event) {
   if (search) {
     getCityWeather(search);
     weatherContainerEl.textContent = '';
-    cityNameEl.value = '';
+    cityNameEl.textContent = '';
     cardGroup.textContent = '';
   } else {
     alert('Please enter a city');
