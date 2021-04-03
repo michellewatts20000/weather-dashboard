@@ -14,15 +14,15 @@
 
 <body>
 
-  <div class="jumbotron jumbotron-fluid">
+  <div class="jumbotron jumbotron-fluid bg-dark text-white">
     <div class="container">
-      <h1 class="display-3">The Weather Dashboard</h1>
+      <h1 class="display-3">The Weather Dashboard <i class="fas fa-wind"></i></h1>
     </div>
   </div>
 
   <div class="container-fluid">
     <div class="row align-items-top">
-      <div id="no-border" class="col-12 col-md-3">
+      <div id="no-border" class="col-12 col-sm-12 col-md-12 col-lg-3">
         <h3 class="text-left">
           Search for a city:
         </h3>
@@ -30,7 +30,7 @@
           <div class="form-group">
             <input type="text" name="city-input" id="city-input" placeholder="Enter a city ..." class="form-control" />
           </div>
-          <button type="submit" id="submit" class="btn btn-primary w-100">Search <i class="fas fa-search"></i></button>
+          <button type="submit" id="submit" class="btn btn-success w-100">Search <i class="fas fa-search"></i></button>
         </form>
         <div id="hereThis" class="card">
 
@@ -40,17 +40,17 @@
 
 
       <!-- main weather in here -->
-      <div id="disappear" class="col-12 col-md-9 text-center">
-        <div class="card mb-3 mt-3 text-white bg-primary">
+      <div id="disappear" class="col-12 col-sm-12 col-md-12 col-lg-9 text-center">
+        <div class="card mb-3 mt-3 text-white bg-info">
           <div class="card-body">
 
             <h2 id="city-name" class="card-title"></h2>
             <div id="weather-display"></div>
           </div>
         </div>
-        <h3 class="text-left">
+        <!-- <h3 class="text-left">
           5 day forecast:
-        </h3>
+        </h3> -->
         <!-- 5 day future forecast here -->
         <div class="card-group" id="card-group">
         </div>

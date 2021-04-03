@@ -67,7 +67,7 @@ function getStorage() {
   }
   for (var i = 0; i < storedCities.length; i++) {
     var cityButton = document.createElement('button');
-    cityButton.classList = 'btn btn-success mt-3';
+    cityButton.classList = 'btn btn-warning mt-3';
     cityButton.setAttribute('data', storedCities[i]);
     cityButton.setAttribute('id', 'click');
     savedBtn.appendChild(cityButton);
@@ -82,7 +82,7 @@ function getStorage() {
 
 var pastSearch = function (city) {
   var cityButton = document.createElement('button');
-  cityButton.classList = 'btn btn-success mt-3';
+  cityButton.classList = 'btn btn-warning mt-3';
   cityButton.setAttribute('data', city);
   cityButton.setAttribute('id', 'click');
   savedBtn.appendChild(cityButton);
@@ -171,7 +171,14 @@ function displayWeather(data, city) {
 
 function getFiveDay(data) {
   // loops through the array to pull the 5 days, excluding 3 hour time intervals
-  for (var i = 8; i < data.list.length; i = i + 8) {
+var forecast = data.list;
+
+  for (var i=8; i < forecast.length; i += 8) {
+
+    console.log(forecast.length);
+    console.log(forecast);
+    console.log(data);
+
     var date = data.list[i].dt_txt;
     var iconic = data.list[i].weather[0].icon;
     var temp = data.list[i].main.temp;
@@ -179,7 +186,7 @@ function getFiveDay(data) {
     var humidity = data.list[i].main.humidity;
 
     newCard = document.createElement('div');
-    newCard.classList = 'card text-white bg-dark m-1';
+    newCard.classList = 'card text-white bg-primary m-1';
     cardGroup.appendChild(newCard);
     innerCard = document.createElement('div');
     innerCard.classList = 'card-body';
