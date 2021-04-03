@@ -24,6 +24,7 @@ function getCityWeather(event) {
     weatherContainerEl.textContent = '';
     cityNameEl.textContent = '';
     cardGroup.textContent = '';
+    cityInputEl.value = '';
   } else {
     alert('Please enter a city');
   }
@@ -137,7 +138,7 @@ function displayWeather(data, city) {
     weatherContainerEl.appendChild(iconEl);
 
     dateEl = document.createElement('h4');
-    var formatDate = moment(justDate[0]).format('MMMM Do YYYY');
+    var formatDate = moment(justDate[0]).format('dddd, MMMM Do YYYY');
 
     // console.log(date);
     // console.log(justDate[0]);
@@ -148,7 +149,7 @@ function displayWeather(data, city) {
     weatherContainerEl.appendChild(dateEl);
 
     tempEl = document.createElement('h4');
-    tempEl.textContent = "Temp: " + justtemp + " C";
+    tempEl.textContent = "Temp: " + justtemp + "\xB0C";
     weatherContainerEl.appendChild(tempEl);
 
     windEl = document.createElement('h4');
@@ -170,7 +171,7 @@ function displayWeather(data, city) {
 
 function getFiveDay(data) {
   // loops through the array to pull the 5 days, excluding 3 hour time intervals
-  for (var i = 5; i < data.list.length; i = i + 8) {
+  for (var i = 8; i < data.list.length; i = i + 8) {
     var date = data.list[i].dt_txt;
     var iconic = data.list[i].weather[0].icon;
     var temp = data.list[i].main.temp;
@@ -199,7 +200,7 @@ function getFiveDay(data) {
     // append the temp
     var justtemp = Math.round(temp);
     cardContent = document.createElement('h4');
-    cardContent.textContent = "Temp: " + justtemp + " C";
+    cardContent.textContent = "Temp: " + justtemp + "\xB0C";
     innerCard.appendChild(cardContent);
 
     // append the wind

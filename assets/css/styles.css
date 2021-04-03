@@ -21,7 +21,7 @@
 
 
 .bg-dark {
-    background-color: lightsteelblue !important;
+    background-color: rgb(82, 98, 119) !important;
 }
 
 #no-border .card {
@@ -43,8 +43,12 @@
 @media screen and (max-width: 767px) {
 
     .display-3 {
-
+        text-align: center;
         font-size: 55px;
+    }
+
+    .text-left {
+        text-align: center !important;
     }
 
 }
