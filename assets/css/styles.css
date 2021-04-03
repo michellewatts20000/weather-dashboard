@@ -2,26 +2,33 @@
     background-color: lightgreen;
     width: 200px;
     margin: 0 auto;
+    border-radius: .25rem;
 }
 
 .moderate {
     background-color: orange;
     width: 200px;
     margin: 0 auto;
+    border-radius: .25rem;
 }
 
 .severe {
     background-color: red;
     width: 200px;
     margin: 0 auto;
+    border-radius: .25rem;
 }
 
 
 #no-border .card {
-    border: none;;
+    border: none;
 
 }
 
+
+.card {
+   border:none;
+}
 
 
 
