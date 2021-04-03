@@ -4,10 +4,7 @@ var weatherContainerEl = document.querySelector('#weather-display');
 var cityNameEl = document.querySelector('#city-name');
 var cardGroup = document.querySelector('#card-group');
 
-
-
 submitBtn.addEventListener("click", getCityWeather);
-
 
 function getCityWeather(event) {
   event.preventDefault();
@@ -15,7 +12,6 @@ function getCityWeather(event) {
 
   if (search) {
     getCityWeather(search);
-
     // clears contents fix later
     weatherContainerEl.textContent = '';
     cityNameEl.value = '';
@@ -26,8 +22,6 @@ function getCityWeather(event) {
 
 var getCityWeather = function (city) {
   var apiUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=2a22b3e133c85e6d24eda75368e647fc&units=metric';
-
-  console.log(apiUrl);
 
   fetch(apiUrl)
     .then(function (response) {
@@ -48,7 +42,7 @@ var getCityWeather = function (city) {
 };
 
 
-
+// loop for today's main weather
 var displayWeather = function (weathers, cityName) {
   if (weathers.length === 0) {
     weatherContainerEl.textContent = 'No repositories found.';
@@ -56,7 +50,7 @@ var displayWeather = function (weathers, cityName) {
   }
 
   cityNameEl.textContent = cityName;
-  // loop for today's weather
+  
   for (var i = 0; i < 1; i++) {
 
     var date = weathers[i].dt_txt;
@@ -64,7 +58,6 @@ var displayWeather = function (weathers, cityName) {
     var wind = weathers[i].wind.speed;
     var humidity = weathers[i].main.humidity;
     var icon = weathers[i].weather[i].icon;
-
     var justDate = date.split(' ');
     var justtemp = Math.round(temp);
 
@@ -73,7 +66,8 @@ var displayWeather = function (weathers, cityName) {
     weatherContainerEl.appendChild(iconEl);
 
     dateEl = document.createElement('h4');
-    dateEl.textContent = "Date: " + justDate[0];
+    var formatDate = moment(justDate[0]).format('DD/MM/YY');
+    dateEl.textContent = "Date: " + formatDate;
     weatherContainerEl.appendChild(dateEl);
 
     tempEl = document.createElement('h4');
@@ -89,35 +83,33 @@ var displayWeather = function (weathers, cityName) {
     weatherContainerEl.appendChild(humidEl);
 
   };
+fiveDayForecast(weathers);
+}
 
 
+// loop for 5 day forecast
+function fiveDayForecast (weathers){
   var previousDate = '';
-  for (var i = 7; i < 42; i++) {
+  for (var i = 7; i < 40; i++) {
     
     var date = weathers[i].dt_txt;
     var currentDate = moment(date).format('L');
 
-    console.log(currentDate);
-
     if (currentDate != previousDate) {
-      console.log(currentDate);
-      console.log(previousDate);
+     
       // var temp = weathers[i].main.temp;
       // var wind = weathers[i].wind.speed;
       // var humidity = weathers[i].main.humidity;
 
-
       newCard = document.createElement('div');
       newCard.classList = 'card';
       cardGroup.appendChild(newCard);
-
       innerCard = document.createElement('div');
       innerCard.classList = 'card-body';
       newCard.appendChild(innerCard);
 
       var justDate = date.split(' ');
       var formatDate = moment(justDate[0]).format('dddd');
-
       cardContent = document.createElement('h4');
       cardContent.textContent = formatDate;
       innerCard.appendChild(cardContent);
@@ -133,7 +125,3 @@ var displayWeather = function (weathers, cityName) {
   // console.log(humidity);
 
 };
-
-
-
-// };
