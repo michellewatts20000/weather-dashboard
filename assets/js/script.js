@@ -56,7 +56,7 @@ var displayWeather = function (weathers, cityName) {
   }
 
   cityNameEl.textContent = cityName;
-
+  // loop for today's weather
   for (var i = 0; i < 1; i++) {
 
     var date = weathers[i].dt_txt;
@@ -88,17 +88,20 @@ var displayWeather = function (weathers, cityName) {
     humidEl.textContent = "Humidity: " + humidity + "%";
     weatherContainerEl.appendChild(humidEl);
 
-
-
-
   };
 
-  for (var i = 0; i < 7; i++) {
 
-
+  var previousDate = '';
+  for (var i = 7; i < 42; i++) {
+    
     var date = weathers[i].dt_txt;
+    var currentDate = moment(date).format('L');
 
-   
+    console.log(currentDate);
+
+    if (currentDate != previousDate) {
+      console.log(currentDate);
+      console.log(previousDate);
       // var temp = weathers[i].main.temp;
       // var wind = weathers[i].wind.speed;
       // var humidity = weathers[i].main.humidity;
@@ -112,24 +115,25 @@ var displayWeather = function (weathers, cityName) {
       innerCard.classList = 'card-body';
       newCard.appendChild(innerCard);
 
+      var justDate = date.split(' ');
+      var formatDate = moment(justDate[0]).format('dddd');
+
       cardContent = document.createElement('h4');
-      cardContent.textContent = date;
+      cardContent.textContent = formatDate;
       innerCard.appendChild(cardContent);
+    }
+    previousDate = currentDate;
 
-   
-
-
-  };
-
+  }
 
 
+  // console.log(date);
+  // console.log(temp);
+  // console.log(wind);
+  // console.log(humidity);
 
 };
 
 
 
-
-// console.log(date);
-// console.log(temp);
-// console.log(wind);
-// console.log(humidity);
+// };
