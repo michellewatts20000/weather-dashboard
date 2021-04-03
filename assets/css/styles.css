@@ -1,3 +1,25 @@
+.favorable {
+    background-color: lightgreen;
+    width: 200px;
+    margin: 0 auto;
+}
+
+.moderate {
+    background-color: orange;
+    width: 200px;
+    margin: 0 auto;
+}
+
+.severe {
+    background-color: red;
+    width: 200px;
+    margin: 0 auto;
+}
+
+
+
+
+
 @media screen and (max-width: 767px) {
 
 .display-3 {
