@@ -9,7 +9,7 @@ var cardsShow = document.querySelector('.card');
 var hideThis = document.querySelector('#disappear');
 
 // var key = config.SECRET_API_KEY;
-// var key = '844421298d794574c100e3409cee0499';
+var key = '844421298d794574c100e3409cee0499';
 
 
 
