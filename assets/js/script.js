@@ -9,10 +9,6 @@ var cardsShow = document.querySelector('.card');
 var hideThis = document.querySelector('#disappear');
 var key = config.SECRET_API_KEY;
 
-
-
-
-
 // where the local storage goes
 var cities = JSON.parse(localStorage.getItem("cities")) || [];
 
@@ -37,13 +33,14 @@ function getCityWeather(event) {
 
 // call the api and retreive the object data from within the list property
 var getCityWeather = function (city) {
-  var apiUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=844421298d794574c100e3409cee0499&units=metric';
+  var apiUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=' + key + '&units=metric';
   fetch(apiUrl)
     .then(function (response) {
       if (response.ok) {
         response.json().then(function (data) {
           displayWeather(data, city);
           hideThis.style.display = "block";
+
         });
       } else {
         alert('Error: ' + response.statusText);
@@ -60,7 +57,7 @@ var getCityWeather = function (city) {
 // sets the local storage
 function saveSearch() {
   localStorage.setItem("cities", JSON.stringify(cities));
-}
+};
 
 // get local storage on a page refresh
 getStorage();
@@ -78,13 +75,12 @@ function getStorage() {
     savedBtn.appendChild(cityButton);
     cityButton.textContent = storedCities[i];
   }
-
   if (storedCities !== null) {
     cities = storedCities;
   }
-}
+};
 
-
+// dynamically makes buttons from previous searches
 var pastSearch = function (city) {
   var cityButton = document.createElement('button');
   cityButton.classList = 'btn btn-warning mt-3';
@@ -92,15 +88,14 @@ var pastSearch = function (city) {
   cityButton.setAttribute('id', 'click');
   savedBtn.appendChild(cityButton);
   cityButton.textContent = city;
-}
-
+};
 
 var pastSearchHandler = function (event) {
   var city = event.target.getAttribute("data")
   weatherContainerEl.textContent = '';
   cityNameEl.value = '';
   cardGroup.textContent = '';
-  var apiUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=844421298d794574c100e3409cee0499&units=metric';
+  var apiUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=' + key + '&units=metric';
   fetch(apiUrl)
     .then(function (response) {
       if (response.ok) {
@@ -115,7 +110,7 @@ var pastSearchHandler = function (event) {
     .catch(function (error) {
       alert('Unable to connect to the Open Weather API');
     });
-}
+};
 
 savedBtn.addEventListener("click", pastSearchHandler);
 
@@ -125,6 +120,7 @@ function displayWeather(data, city) {
     weatherContainerEl.textContent = 'No weather found.';
     return;
   }
+
   // update city name in the html
   cityNameEl.textContent = city;
 
@@ -137,58 +133,53 @@ function displayWeather(data, city) {
     var justDate = date.split(' ');
     var justtemp = Math.round(temp);
 
+    // shows the date
+    dateEl = document.createElement('h4');
+    var formatDate = moment(justDate[0]).format('dddd, MMMM Do YYYY');
+    dateEl.textContent = formatDate;
+    weatherContainerEl.appendChild(dateEl);
+    console.log(date);
+
     // sets the weather icon
     iconEl = document.createElement('img');
     iconEl.setAttribute('src', 'http://openweathermap.org/img/wn/' + iconWeather + '@2x.png');
     weatherContainerEl.appendChild(iconEl);
 
-    dateEl = document.createElement('h4');
-    var formatDate = moment(justDate[0]).format('dddd, MMMM Do YYYY');
-
-    // console.log(date);
-    // console.log(justDate[0]);
-    // console.log(formatDate);
-    // console.log(realTime);
-
-    dateEl.textContent = formatDate;
-    weatherContainerEl.appendChild(dateEl);
-
+    // shows the temp
     tempEl = document.createElement('h4');
     tempEl.textContent = "Temp: " + justtemp + "\xB0C";
     weatherContainerEl.appendChild(tempEl);
 
-    windEl = document.createElement('h4');
-    windEl.textContent = "Wind: " + wind + " km/h";
-    weatherContainerEl.appendChild(windEl);
-
+    // shows the humidity
     humidEl = document.createElement('h4');
     humidEl.textContent = "Humidity: " + humidity + "%";
     weatherContainerEl.appendChild(humidEl);
+
+    // shows the wind
+    windEl = document.createElement('h4');
+    windEl.textContent = "Wind: " + wind + " km/h";
+    weatherContainerEl.appendChild(windEl);
 
     // get data to display UV index
     var lat = data.city.coord.lat;
     var lon = data.city.coord.lon;
     getUvIndex(lat, lon);
     getFiveDay(data);
-
   }
-}
+};
 
 function getFiveDay(data) {
   // loops through the array to pull the 5 days, excluding 3 hour time intervals
-var forecast = data.list;
+  var forecast = data.list;
 
-  for (var i=8; i < forecast.length; i += 8) {
-
-    console.log(forecast.length);
-    console.log(forecast);
-    console.log(data);
-
+  for (var i = 5; i < forecast.length; i += 8) {
     var date = data.list[i].dt_txt;
     var iconic = data.list[i].weather[0].icon;
     var temp = data.list[i].main.temp;
     var wind = data.list[i].wind.speed;
     var humidity = data.list[i].main.humidity;
+
+    console.log(date);
 
     newCard = document.createElement('div');
     newCard.classList = 'card text-white bg-primary m-1';
@@ -197,16 +188,16 @@ var forecast = data.list;
     innerCard.classList = 'card-body';
     newCard.appendChild(innerCard);
 
-    // append the icon
-    cardContent = document.createElement("img")
-    cardContent.setAttribute('src', 'https://openweathermap.org/img/wn/' + iconic + '@2x.png');
-    innerCard.appendChild(cardContent);
-
     // append the date
     var justDate = date.split(' ');
     var formatDate = moment(justDate[0]).format('dddd');
     cardContent = document.createElement('h4');
     cardContent.textContent = formatDate;
+    innerCard.appendChild(cardContent);
+
+    // append the icon
+    cardContent = document.createElement("img")
+    cardContent.setAttribute('src', 'https://openweathermap.org/img/wn/' + iconic + '@2x.png');
     innerCard.appendChild(cardContent);
 
     // append the temp
@@ -215,38 +206,33 @@ var forecast = data.list;
     cardContent.textContent = "Temp: " + justtemp + "\xB0C";
     innerCard.appendChild(cardContent);
 
-    // append the wind
-    cardContent = document.createElement('h4');
-    cardContent.textContent = "Wind: " + wind + " km/h";
-    innerCard.appendChild(cardContent);
-
     // append the humidity
     cardContent = document.createElement('h4');
     cardContent.textContent = "Humidity: " + humidity + "%";
     innerCard.appendChild(cardContent);
 
+    // append the wind
+    cardContent = document.createElement('h4');
+    cardContent.textContent = "Wind: " + wind + " km/h";
+    innerCard.appendChild(cardContent);
   }
-
 };
-
 
 // calls api to retreive UV index
 var getUvIndex = function (lat, lon) {
-  var apiURL = `https://api.openweathermap.org/data/2.5/uvi?appid=${key}&lat=${lat}&lon=${lon}`
+  var apiURL = 'https://api.openweathermap.org/data/2.5/uvi?appid=' + key + '&lat=' + lat + '&lon=' + lon;
   fetch(apiURL)
     .then(function (response) {
       response.json().then(function (data) {
-        displayUvIndex(data)
-
+        displayUvIndex(data);
       });
     });
-}
+};
 
 // appends UV index to today's weather and gives it a background colour based on its value
 var displayUvIndex = function (index) {
   uvIndexValue = document.createElement("h4")
   uvIndexValue.textContent = "UV Index: " + index.value;
-
   if (index.value <= 2) {
     uvIndexValue.classList = "favorable"
   } else if (index.value > 2 && index.value <= 8) {
@@ -256,7 +242,6 @@ var displayUvIndex = function (index) {
   };
   weatherContainerEl.appendChild(uvIndexValue);
 }
-
 
 clearBtn.addEventListener("click", clearStorage);
 
