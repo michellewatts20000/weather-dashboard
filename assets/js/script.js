@@ -90,6 +90,7 @@ var pastSearch = function (city) {
   cityButton.textContent = city;
 };
 
+// make an api call on the saved 
 var pastSearchHandler = function (event) {
   var city = event.target.getAttribute("data")
   weatherContainerEl.textContent = '';
@@ -112,6 +113,7 @@ var pastSearchHandler = function (event) {
     });
 };
 
+// when clicked on a history button run the pastSearchHandler
 savedBtn.addEventListener("click", pastSearchHandler);
 
 // loop for today's main weather
@@ -181,6 +183,7 @@ function getFiveDay(data) {
 
     console.log(date);
 
+    // creates a card for each new day in the 5 days
     newCard = document.createElement('div');
     newCard.classList = 'card text-white bg-primary m-1';
     cardGroup.appendChild(newCard);
@@ -243,8 +246,10 @@ var displayUvIndex = function (index) {
   weatherContainerEl.appendChild(uvIndexValue);
 }
 
+// on click run clear storage
 clearBtn.addEventListener("click", clearStorage);
 
+// clears the storages where previous searches are stored
 function clearStorage() {
   localStorage.clear();
   savedBtn.innerHTML = "";
