@@ -9,7 +9,7 @@ var cardsShow = document.querySelector('.card');
 var hideThis = document.querySelector('#disappear');
 
 // var key = config.SECRET_API_KEY;
-var key = '844421298d794574c100e3409cee0499';
+// var key = '844421298d794574c100e3409cee0499';
 
 
 
@@ -37,7 +37,7 @@ function getCityWeather(event) {
 
 // call the api and retreive the object data from within the list property
 var getCityWeather = function (city) {
-  var apiUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=' + key + '&units=metric';
+  var apiUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=844421298d794574c100e3409cee0499&units=metric';
   fetch(apiUrl)
     .then(function (response) {
       if (response.ok) {
@@ -100,7 +100,7 @@ var pastSearchHandler = function (event) {
   weatherContainerEl.textContent = '';
   cityNameEl.value = '';
   cardGroup.textContent = '';
-  var apiUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=' + key + '&units=metric';
+  var apiUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=844421298d794574c100e3409cee0499&units=metric';
   fetch(apiUrl)
     .then(function (response) {
       if (response.ok) {
