@@ -8,7 +8,10 @@ var clearBtn = document.querySelector('#btnclear');
 var cardsShow = document.querySelector('.card');
 var hideThis = document.querySelector('#disappear');
 
-var key = config.SECRET_API_KEY;
+// var key = config.SECRET_API_KEY;
+var config = {
+  SECRET_API_KEY : '844421298d794574c100e3409cee0499'
+}
 
 
 // where the local storage goes
