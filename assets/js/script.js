@@ -123,10 +123,12 @@ function displayWeather(data, city) {
     return;
   }
 
+  
   // update city name in the html
-  cityNameEl.textContent = city;
+  cityNameEl.textContent = city + ", " + data.city.country;
 
   for (let i = 3; i < 4; i++) {
+    console.log(data);
     var date = data.list[i].dt_txt;
     var temp = data.list[i].main.temp;
     var wind = data.list[i].wind.speed;
