@@ -7,7 +7,7 @@ var savedBtn = document.querySelector('#hereThis');
 var clearBtn = document.querySelector('#btnclear');
 var cardsShow = document.querySelector('.card');
 var hideThis = document.querySelector('#disappear');
-var key = config.SECRET_API_KEY;
+
 
 // where the local storage goes
 var cities = JSON.parse(localStorage.getItem("cities")) || [];
