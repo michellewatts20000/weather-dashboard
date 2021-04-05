@@ -123,52 +123,62 @@ function displayWeather(data, city) {
     return;
   }
 
-  
+
   // update city name in the html
   cityNameEl.textContent = city + ", " + data.city.country;
 
-  for (let i = 0; i < 1; i++) {
-    
+  for (let i = 0; i < 8; i++) {
+
     var date = data.list[i].dt_txt;
     var temp = data.list[i].main.temp;
     var wind = data.list[i].wind.speed;
     var humidity = data.list[i].main.humidity;
     var iconWeather = data.list[i].weather[0].icon;
     var justDate = date.split(' ');
-    var justtemp = Math.round(temp);
+    var justTemp = Math.round(temp);
 
-    // shows the date
-    dateEl = document.createElement('h4');
-    var formatDate = moment(justDate[0]).format('dddd, MMMM Do YYYY');
-    dateEl.textContent = formatDate;
-    weatherContainerEl.appendChild(dateEl);
-    console.log(date);
+    var newOne = justDate[1].split(':');
+    var simpleTime = moment().hours();
+    var simpleTime2 = simpleTime + 1;
+    var simpleTime3 = simpleTime2 + 1;
+    var newNew = newOne[0];
+    var newNew2 = Math.floor(newNew);
 
-    // sets the weather icon
-    iconEl = document.createElement('img');
-    iconEl.setAttribute('src', 'http://openweathermap.org/img/wn/' + iconWeather + '@2x.png');
-    weatherContainerEl.appendChild(iconEl);
+    if (newNew2 === simpleTime || newNew2 === simpleTime2 || newNew2 === simpleTime3) {
+      // shows the date
+      dateEl = document.createElement('h4');
+      var formatDate = moment(justDate[0]).format('dddd, MMMM Do YYYY');
+      dateEl.textContent = formatDate;
+      weatherContainerEl.appendChild(dateEl);
+      console.log(date);
+      console.log(data.list);
 
-    // shows the temp
-    tempEl = document.createElement('h4');
-    tempEl.textContent = "Temp: " + justtemp + "\xB0C";
-    weatherContainerEl.appendChild(tempEl);
+      // sets the weather icon
+      iconEl = document.createElement('img');
+      iconEl.setAttribute('src', 'http://openweathermap.org/img/wn/' + iconWeather + '@2x.png');
+      weatherContainerEl.appendChild(iconEl);
 
-    // shows the humidity
-    humidEl = document.createElement('h4');
-    humidEl.textContent = "Humidity: " + humidity + "%";
-    weatherContainerEl.appendChild(humidEl);
+      // shows the temp
+      tempEl = document.createElement('h4');
+      tempEl.textContent = "Temp: " + justTemp + "\xB0C";
+      weatherContainerEl.appendChild(tempEl);
 
-    // shows the wind
-    windEl = document.createElement('h4');
-    windEl.textContent = "Wind: " + wind + " km/h";
-    weatherContainerEl.appendChild(windEl);
+      // shows the humidity
+      humidEl = document.createElement('h4');
+      humidEl.textContent = "Humidity: " + humidity + "%";
+      weatherContainerEl.appendChild(humidEl);
 
-    // get data to display UV index
-    var lat = data.city.coord.lat;
-    var lon = data.city.coord.lon;
-    getUvIndex(lat, lon);
-    getFiveDay(data);
+      // shows the wind
+      windEl = document.createElement('h4');
+      windEl.textContent = "Wind: " + wind + " km/h";
+      weatherContainerEl.appendChild(windEl);
+
+      // get data to display UV index
+      var lat = data.city.coord.lat;
+      var lon = data.city.coord.lon;
+      getUvIndex(lat, lon);
+      getFiveDay(data);
+    }
   }
 };
 
@@ -176,50 +186,56 @@ function getFiveDay(data) {
   // loops through the array to pull the 5 days, excluding 3 hour time intervals
   var forecast = data.list;
 
-  for (var i = 0; i < forecast.length; i += 8) {
+  for (var i = 0; i < forecast.length; i++) {
     var date = data.list[i].dt_txt;
     var iconic = data.list[i].weather[0].icon;
     var temp = data.list[i].main.temp;
     var wind = data.list[i].wind.speed;
     var humidity = data.list[i].main.humidity;
-
-    console.log(date);
-
-    // creates a card for each new day in the 5 days
-    newCard = document.createElement('div');
-    newCard.classList = 'card text-white bg-primary m-1';
-    cardGroup.appendChild(newCard);
-    innerCard = document.createElement('div');
-    innerCard.classList = 'card-body';
-    newCard.appendChild(innerCard);
-
-    // append the date
     var justDate = date.split(' ');
     var formatDate = moment(justDate[0]).format('dddd');
-    cardContent = document.createElement('h4');
-    cardContent.textContent = formatDate;
-    innerCard.appendChild(cardContent);
 
-    // append the icon
-    cardContent = document.createElement("img")
-    cardContent.setAttribute('src', 'https://openweathermap.org/img/wn/' + iconic + '@2x.png');
-    innerCard.appendChild(cardContent);
+    // return day result for future days
+    if (justDate[1] === "03:00:00") {
 
-    // append the temp
-    var justtemp = Math.round(temp);
-    cardContent = document.createElement('h4');
-    cardContent.textContent = "Temp: " + justtemp + "\xB0C";
-    innerCard.appendChild(cardContent);
+      console.log(date);
+      console.log(justDate[1]);
 
-    // append the humidity
-    cardContent = document.createElement('h4');
-    cardContent.textContent = "Humidity: " + humidity + "%";
-    innerCard.appendChild(cardContent);
+      // creates a card for each new day in the 5 days
+      newCard = document.createElement('div');
+      newCard.classList = 'card text-white bg-primary m-1';
+      cardGroup.appendChild(newCard);
+      innerCard = document.createElement('div');
+      innerCard.classList = 'card-body';
+      newCard.appendChild(innerCard);
 
-    // append the wind
-    cardContent = document.createElement('h4');
-    cardContent.textContent = "Wind: " + wind + " km/h";
-    innerCard.appendChild(cardContent);
+      // append the date
+
+      cardContent = document.createElement('h4');
+      cardContent.textContent = formatDate;
+      innerCard.appendChild(cardContent);
+
+      // append the icon
+      cardContent = document.createElement("img")
+      cardContent.setAttribute('src', 'https://openweathermap.org/img/wn/' + iconic + '@2x.png');
+      innerCard.appendChild(cardContent);
+
+      // append the temp
+      var justtemp = Math.round(temp);
+      cardContent = document.createElement('h4');
+      cardContent.textContent = "Temp: " + justtemp + "\xB0C";
+      innerCard.appendChild(cardContent);
+
+      // append the humidity
+      cardContent = document.createElement('h4');
+      cardContent.textContent = "Humidity: " + humidity + "%";
+      innerCard.appendChild(cardContent);
+
+      // append the wind
+      cardContent = document.createElement('h4');
+      cardContent.textContent = "Wind: " + wind + " km/h";
+      innerCard.appendChild(cardContent);
+    }
   }
 };
 
