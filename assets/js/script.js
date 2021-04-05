@@ -127,8 +127,8 @@ function displayWeather(data, city) {
   // update city name in the html
   cityNameEl.textContent = city + ", " + data.city.country;
 
-  for (let i = 3; i < 4; i++) {
-    console.log(data);
+  for (let i = 0; i < 1; i++) {
+    
     var date = data.list[i].dt_txt;
     var temp = data.list[i].main.temp;
     var wind = data.list[i].wind.speed;
@@ -176,7 +176,7 @@ function getFiveDay(data) {
   // loops through the array to pull the 5 days, excluding 3 hour time intervals
   var forecast = data.list;
 
-  for (var i = 5; i < forecast.length; i += 8) {
+  for (var i = 0; i < forecast.length; i += 8) {
     var date = data.list[i].dt_txt;
     var iconic = data.list[i].weather[0].icon;
     var temp = data.list[i].main.temp;
