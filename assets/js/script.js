@@ -150,8 +150,7 @@ function displayWeather(data, city) {
       var formatDate = moment(justDate[0]).format('dddd, MMMM Do YYYY');
       dateEl.textContent = formatDate;
       weatherContainerEl.appendChild(dateEl);
-      console.log(date);
-      console.log(data.list);
+      
 
       // sets the weather icon
       iconEl = document.createElement('img');
@@ -197,9 +196,6 @@ function getFiveDay(data) {
 
     // return day result for future days
     if (justDate[1] === "03:00:00") {
-
-      console.log(date);
-      console.log(justDate[1]);
 
       // creates a card for each new day in the 5 days
       newCard = document.createElement('div');
