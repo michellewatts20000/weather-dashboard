@@ -155,7 +155,7 @@ function displayWeather(data, city) {
 
       // sets the weather icon
       iconEl = document.createElement('img');
-      iconEl.setAttribute('src', 'http://openweathermap.org/img/wn/' + iconWeather + '@2x.png');
+      iconEl.setAttribute('src', 'https://openweathermap.org/img/wn/' + iconWeather + '@2x.png');
       weatherContainerEl.appendChild(iconEl);
 
       // shows the temp
