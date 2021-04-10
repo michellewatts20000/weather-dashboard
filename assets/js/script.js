@@ -127,7 +127,7 @@ function displayWeather(data, city) {
   // update city name in the html
   cityNameEl.textContent = city + ", " + data.city.country;
 
-  for (let i = 0; i < 8; i++) {
+  for (let i = 0; i < 1; i++) {
 
     var date = data.list[i].dt_txt;
     var temp = data.list[i].main.temp;
@@ -137,14 +137,21 @@ function displayWeather(data, city) {
     var justDate = date.split(' ');
     var justTemp = Math.round(temp);
 
+   
+    // 10 hours difference between UTC time and Sydney time, adjust time so correct weather is shown for people in UTC + 10 time zone
+
     var newOne = justDate[1].split(':');
+    var newNew = newOne[0];
+    var newNew2 = Math.floor(newNew);
+    sydneyTime = newNew2 + 10;
+
     var simpleTime = moment().hours();
     var simpleTime2 = simpleTime + 1;
     var simpleTime3 = simpleTime2 + 1;
-    var newNew = newOne[0];
-    var newNew2 = Math.floor(newNew);
+    var simpleTime4 = simpleTime3 + 1;
+    
 
-    if (newNew2 === simpleTime || newNew2 === simpleTime2 || newNew2 === simpleTime3) {
+    if (sydneyTime === simpleTime || sydneyTime === simpleTime2 || sydneyTime === simpleTime3 || sydneyTime === simpleTime4) {
       // shows the date
       dateEl = document.createElement('h4');
       var formatDate = moment(justDate[0]).format('dddd, MMMM Do YYYY');
