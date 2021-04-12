@@ -7,7 +7,7 @@ var savedBtn = document.querySelector('#hereThis');
 var clearBtn = document.querySelector('#btnclear');
 var cardsShow = document.querySelector('.card');
 var hideThis = document.querySelector('#disappear');
-var key = config.SECRET_API_KEY;
+var key = '844421298d794574c100e3409cee0499'
 
 // where the local storage goes
 var cities = JSON.parse(localStorage.getItem("cities")) || [];
@@ -123,12 +123,9 @@ function displayWeather(data, city) {
     return;
   }
 
-
   // update city name in the html
   cityNameEl.textContent = city + ", " + data.city.country;
-
   for (let i = 0; i < 1; i++) {
-
     var date = data.list[i].dt_txt;
     var temp = data.list[i].main.temp;
     var wind = data.list[i].wind.speed;
@@ -140,18 +137,18 @@ function displayWeather(data, city) {
    
     // 10 hours difference between UTC time and Sydney time, adjust time so correct weather is shown for people in UTC + 10 time zone
 
-    var newOne = justDate[1].split(':');
-    var newNew = newOne[0];
-    var newNew2 = Math.floor(newNew);
-    sydneyTime = newNew2 + 10;
+    // var newOne = justDate[1].split(':');
+    // var newNew = newOne[0];
+    // var newNew2 = Math.floor(newNew);
+    // sydneyTime = newNew2 + 10;
 
-    var simpleTime = moment().hours();
-    var simpleTime2 = simpleTime + 1;
-    var simpleTime3 = simpleTime2 + 1;
-    var simpleTime4 = simpleTime3 + 1;
+    // var simpleTime = moment().hours();
+    // var simpleTime2 = simpleTime + 1;
+    // var simpleTime3 = simpleTime2 + 1;
+    // var simpleTime4 = simpleTime3 + 1;
     
 
-    if (sydneyTime === simpleTime || sydneyTime === simpleTime2 || sydneyTime === simpleTime3 || sydneyTime === simpleTime4) {
+    // if (sydneyTime === simpleTime || sydneyTime === simpleTime2 || sydneyTime === simpleTime3 || sydneyTime === simpleTime4) {
       // shows the date
       dateEl = document.createElement('h4');
       var formatDate = moment(justDate[0]).format('dddd, MMMM Do YYYY');
@@ -185,7 +182,7 @@ function displayWeather(data, city) {
       getUvIndex(lat, lon);
       getFiveDay(data);
     }
-  }
+  // }
 };
 
 function getFiveDay(data) {
