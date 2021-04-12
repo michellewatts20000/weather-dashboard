@@ -7,7 +7,9 @@ var savedBtn = document.querySelector('#hereThis');
 var clearBtn = document.querySelector('#btnclear');
 var cardsShow = document.querySelector('.card');
 var hideThis = document.querySelector('#disappear');
-var key = '844421298d794574c100e3409cee0499'
+var key = config.SECRET_API_KEY;
+
+console.log(key);
 
 // where the local storage goes
 var cities = JSON.parse(localStorage.getItem("cities")) || [];
@@ -134,28 +136,12 @@ function displayWeather(data, city) {
     var justDate = date.split(' ');
     var justTemp = Math.round(temp);
 
-   
-    // 10 hours difference between UTC time and Sydney time, adjust time so correct weather is shown for people in UTC + 10 time zone
-
-    // var newOne = justDate[1].split(':');
-    // var newNew = newOne[0];
-    // var newNew2 = Math.floor(newNew);
-    // sydneyTime = newNew2 + 10;
-
-    // var simpleTime = moment().hours();
-    // var simpleTime2 = simpleTime + 1;
-    // var simpleTime3 = simpleTime2 + 1;
-    // var simpleTime4 = simpleTime3 + 1;
-    
-
-    // if (sydneyTime === simpleTime || sydneyTime === simpleTime2 || sydneyTime === simpleTime3 || sydneyTime === simpleTime4) {
       // shows the date
       dateEl = document.createElement('h4');
       var formatDate = moment(justDate[0]).format('dddd, MMMM Do YYYY');
       dateEl.textContent = formatDate;
       weatherContainerEl.appendChild(dateEl);
       
-
       // sets the weather icon
       iconEl = document.createElement('img');
       iconEl.setAttribute('src', 'https://openweathermap.org/img/wn/' + iconWeather + '@2x.png');
@@ -182,7 +168,6 @@ function displayWeather(data, city) {
       getUvIndex(lat, lon);
       getFiveDay(data);
     }
-  // }
 };
 
 function getFiveDay(data) {
